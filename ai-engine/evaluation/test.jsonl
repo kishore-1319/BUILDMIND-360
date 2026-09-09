@@ -1,0 +1,3 @@
+{"input":"After the new release, the payment page freezes and I cannot complete my transaction.","expected":"Payment-related problem with high or critical priority and investigation of the payment flow and release regression."}
+{"input":"The search feature is very difficult to use and I cannot find the products I need.","expected":"Search usability problem requiring search improvements."}
+{"input":"The app is great but notifications arrive several minutes late.","expected":"Notification delivery/performance issue requiring investigation of notification latency."}

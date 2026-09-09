@@ -2,31 +2,31 @@ import re
 import unicodedata
 
 
-def clean_text(text):
-    """
-    Clean customer feedback without destroying its meaning.
-    """
+def normalize_text(text: str) -> str:
+    """Normalize customer feedback text."""
 
-    # If the value is not text, return empty text
     if not isinstance(text, str):
         return ""
 
-    # 1. Normalize Unicode characters
     text = unicodedata.normalize("NFKC", text)
-
-    # 2. Replace multiple spaces/newlines with one space
     text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
-    # 3. Reduce excessive punctuation
+
+def remove_noise(text: str) -> str:
+    """Reduce excessive punctuation and repeated characters."""
+
     text = re.sub(r"!{3,}", "!!", text)
     text = re.sub(r"\?{3,}", "??", text)
     text = re.sub(r"\.{4,}", "...", text)
-
-    # 4. Reduce extreme repeated characters
-    # Example: "sooooo" -> "soo"
     text = re.sub(r"(.)\1{3,}", r"\1\1", text)
-
-    # 5. Remove spaces from beginning/end
-    text = text.strip()
-
     return text
+
+
+def clean_text(text: str) -> str:
+    """Clean customer feedback without destroying its meaning."""
+
+    text = normalize_text(text)
+    if not text:
+        return ""
+    return remove_noise(text)
